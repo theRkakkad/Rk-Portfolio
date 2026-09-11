@@ -122,9 +122,7 @@ export default function Navigation() {
   const [isMoreOpen, setIsMoreOpen] = useState(false);
   const [isGuestbookOpen, setIsGuestbookOpen] = useState(false);
   const isDarkTheme = activeSection === 'contact' || 
-                      location.pathname === '/youtube-videos' || 
-                      location.pathname === '/github-stats' || 
-                      location.pathname === '/leetcode-stats';
+                      location.pathname === '/youtube-videos';
 
   const observerRef = useRef<IntersectionObserver | null>(null);
   const scrollLockRef = useRef(false);

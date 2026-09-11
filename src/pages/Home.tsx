@@ -8,7 +8,7 @@ import createGlobe from 'cobe';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import AIAssistant from '../components/AIAssistant';
-import StampIntro from '../components/StampPreloader';
+import VideoIntro from '../components/VideoIntro';
 import LazySection from '../components/LazySection';
 import SEO from '../components/SEO';
 import { useScrollReveal } from '../useScrollReveal';
@@ -100,9 +100,9 @@ function RotatingGlobe() {
 
 export default function Home() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const portraitRef  = useRef<HTMLImageElement>(null);
-  const location     = useLocation();
-  const navigate     = useNavigate();
+  const portraitRef = useRef<HTMLImageElement>(null);
+  const location = useLocation();
+  const navigate = useNavigate();
   const [introDone, setIntroDone] = useState(
     !!(location.state as any)?.skipIntro
   );
@@ -113,7 +113,7 @@ export default function Home() {
 
   useEffect(() => {
     if (!introDone) return;
-    const path   = location.pathname.substring(1);
+    const path = location.pathname.substring(1);
     const target = (location.state as any)?.scrollTo || path;
     if (target && target !== 'home') {
       const el = document.getElementById(target === 'work' ? 'hackathon' : target);
@@ -135,7 +135,7 @@ export default function Home() {
       />
       <AnimatePresence mode="wait">
         {!introDone && (
-          <StampIntro key="stamp-intro" onComplete={handleIntroComplete} />
+          <VideoIntro key="video-intro" onComplete={handleIntroComplete} />
         )}
       </AnimatePresence>
 
@@ -178,7 +178,7 @@ export default function Home() {
               </div>
 
               <p className="mt-3 md:mt-5 text-[11px] md:text-[13px] text-white/70 leading-relaxed max-w-[320px] md:max-w-lg drop-shadow-md">
-                First-year CS student who doesn't wait to be ready. Built Sanjeevani - an AI system auditing hospital bills against 1,995 live government rates. Selected for GSSoC out of 42,000+ applicants. I ship real things with React, Node,x FastAPI & Python.
+                Second-year CS student building full-stack systems for security-sensitive government environments - from computer vision pipelines to secure dashboards. Built to survive real deployment, not just a demo. Where access control and data integrity aren't features - they're the whole point.
               </p>
 
               <div className="mt-4 md:mt-6 flex flex-wrap items-center gap-4 md:gap-5">

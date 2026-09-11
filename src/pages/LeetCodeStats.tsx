@@ -1,136 +1,279 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { motion, AnimatePresence, useScroll, useTransform, useSpring, useMotionValue } from 'framer-motion';
-import { Trophy, Code2, Clock, Zap, Star, Target, TrendingUp, Calendar, ChevronRight, Flame, Award, Brain, CheckCircle, ArrowLeft, Activity, Cpu, Binary, Network, Shield, ZapIcon, Globe, Command, Terminal, Layers, Eye, Radio, Fingerprint, Sparkles } from 'lucide-react';
+import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
+import * as THREE from 'three';
+import { 
+  Trophy, 
+  Clock, 
+  Zap, 
+  Star, 
+  Target, 
+  TrendingUp, 
+  Calendar, 
+  Award, 
+  CheckCircle2, 
+  ArrowLeft, 
+  ExternalLink,
+  Flame,
+  Code2,
+  BrainCircuit,
+  BarChart3,
+  Layers,
+  Sparkles,
+  RefreshCw,
+  XCircle,
+  AlertCircle,
+  Cpu,
+  Binary,
+  Compass
+} from 'lucide-react';
 import { Helmet } from 'react-helmet-async';
 import { LeetCode } from '../components/Icons';
 import { useNavigate, useLocation } from 'react-router-dom';
 import SEO from '../components/SEO';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-gsap.registerPlugin(ScrollTrigger);
+const LEETCODE_USERNAME = 'kUyAWXHOC5';
+const CACHE_KEY = 'leetcode_live_stats_v3';
+const CACHE_DURATION = 15 * 60 * 1000; // 15 minutes
+
+interface RecentSubmission {
+  title: string;
+  titleSlug: string;
+  timestamp: string;
+  statusDisplay: string;
+  lang: string;
+}
 
 interface LeetCodeProfile {
   username: string;
   totalSolved: number;
+  totalQuestions: number;
   easySolved: number;
+  totalEasy: number;
   mediumSolved: number;
+  totalMedium: number;
   hardSolved: number;
+  totalHard: number;
   ranking: number;
   contributionPoints: number;
   reputation: number;
   submissionCalendar: Record<string, number>;
+  recentSubmissions: RecentSubmission[];
 }
 
-const difficultyColors = {
-  Easy: '#22c55e',
-  Medium: '#f59e0b',
-  Hard: '#ef4444',
+const FALLBACK_PROFILE: LeetCodeProfile = {
+  username: 'kUyAWXHOC5',
+  totalSolved: 274,
+  totalQuestions: 4041,
+  easySolved: 185,
+  totalEasy: 962,
+  mediumSolved: 75,
+  totalMedium: 2109,
+  hardSolved: 14,
+  totalHard: 970,
+  ranking: 565810,
+  contributionPoints: 124,
+  reputation: 0,
+  submissionCalendar: {
+    "1775952000": 42,
+    "1777161600": 31,
+    "1777334400": 22,
+    "1778457600": 20,
+    "1786579200": 17,
+    "1786924800": 17,
+    "1786665600": 11,
+    "1780617600": 9,
+    "1780963200": 7
+  },
+  recentSubmissions: [
+    { title: "Delete Duplicate Emails", titleSlug: "delete-duplicate-emails", timestamp: "1786962270", statusDisplay: "Accepted", lang: "mysql" },
+    { title: "Patients With a Condition", titleSlug: "patients-with-a-condition", timestamp: "1786962216", statusDisplay: "Accepted", lang: "mysql" },
+    { title: "List the Products Ordered in a Period", titleSlug: "list-the-products-ordered-in-a-period", timestamp: "1786961974", statusDisplay: "Accepted", lang: "mysql" },
+    { title: "Second Highest Salary", titleSlug: "second-highest-salary", timestamp: "1786961693", statusDisplay: "Accepted", lang: "mysql" },
+    { title: "Flatten a Multilevel Doubly Linked List", titleSlug: "flatten-a-multilevel-doubly-linked-list", timestamp: "1786960162", statusDisplay: "Accepted", lang: "cpp" },
+    { title: "Minimum Increment to Make Array Unique", titleSlug: "minimum-increment-to-make-array-unique", timestamp: "1786959174", statusDisplay: "Accepted", lang: "cpp" },
+    { title: "Stone Game IX", titleSlug: "stone-game-ix", timestamp: "1786899932", statusDisplay: "Accepted", lang: "cpp" }
+  ]
 };
 
-// --- BEYOND GOD TIER UTILITY COMPONENTS ---
-
-const ScrambleText = ({ text, delay = 0 }: { text: string, delay?: number }) => {
-  const [displayText, setDisplayText] = useState('');
-  const chars = '!@#$%^&*()_+{}:"<>?-=[];,./';
+// ─── 3D ALGORITHMIC KINETIC CORE (THREE.JS) ──────────────────────────────────
+function Interactive3DAlgorithmicCore() {
+  const mountRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    let iteration = 0;
-    const interval = setInterval(() => {
-      setDisplayText(
-        text
-          .split('')
-          .map((char, index) => {
-            if (index < iteration) return text[index];
-            return chars[Math.floor(Math.random() * chars.length)];
-          })
-          .join('')
-      );
+    const container = mountRef.current;
+    if (!container) return;
 
-      if (iteration >= text.length) clearInterval(interval);
-      iteration += 1 / 3;
-    }, 30);
-    return () => clearInterval(interval);
-  }, [text]);
+    const width = container.clientWidth || 320;
+    const height = container.clientHeight || 320;
 
-  return <span>{displayText}</span>;
-};
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000);
+    camera.position.z = 4.5;
 
-const PerspectiveGrid = () => {
-  const { scrollY } = useScroll();
-  const rotateX = useTransform(scrollY, [0, 5000], [20, 60]);
-  const translateZ = useTransform(scrollY, [0, 5000], [0, 200]);
-  const opacity = useTransform(scrollY, [0, 1000], [0.2, 0.05]);
+    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+    renderer.setSize(width, height);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    container.appendChild(renderer.domElement);
+
+    // Central Dodecahedron Core
+    const coreGeo = new THREE.DodecahedronGeometry(1.2, 1);
+    const coreMat = new THREE.MeshBasicMaterial({
+      color: 0xF59E0B,
+      wireframe: true,
+      transparent: true,
+      opacity: 0.45,
+    });
+    const coreMesh = new THREE.Mesh(coreGeo, coreMat);
+    scene.add(coreMesh);
+
+    // Ring 1 (Easy - Green)
+    const ring1Geo = new THREE.TorusGeometry(1.6, 0.02, 16, 64);
+    const ring1Mat = new THREE.MeshBasicMaterial({
+      color: 0x16A34A,
+      transparent: true,
+      opacity: 0.6,
+    });
+    const ring1 = new THREE.Mesh(ring1Geo, ring1Mat);
+    ring1.rotation.x = Math.PI / 3;
+    scene.add(ring1);
+
+    // Ring 2 (Medium - Amber)
+    const ring2Geo = new THREE.TorusGeometry(1.9, 0.02, 16, 64);
+    const ring2Mat = new THREE.MeshBasicMaterial({
+      color: 0xD97706,
+      transparent: true,
+      opacity: 0.5,
+    });
+    const ring2 = new THREE.Mesh(ring2Geo, ring2Mat);
+    ring2.rotation.y = Math.PI / 4;
+    scene.add(ring2);
+
+    // Ring 3 (Hard - Red)
+    const ring3Geo = new THREE.TorusGeometry(2.2, 0.02, 16, 64);
+    const ring3Mat = new THREE.MeshBasicMaterial({
+      color: 0xDC2626,
+      transparent: true,
+      opacity: 0.4,
+    });
+    const ring3 = new THREE.Mesh(ring3Geo, ring3Mat);
+    ring3.rotation.z = Math.PI / 6;
+    scene.add(ring3);
+
+    // Orbiting particle points
+    const particleCount = 45;
+    const particleGeo = new THREE.BufferGeometry();
+    const positions = new Float32Array(particleCount * 3);
+
+    for (let i = 0; i < particleCount; i++) {
+      const radius = 2.4 + Math.random() * 0.4;
+      const theta = Math.random() * Math.PI * 2;
+      const phi = Math.acos(Math.random() * 2 - 1);
+      positions[i * 3] = radius * Math.sin(phi) * Math.cos(theta);
+      positions[i * 3 + 1] = radius * Math.sin(phi) * Math.sin(theta);
+      positions[i * 3 + 2] = radius * Math.cos(phi);
+    }
+
+    particleGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+    const particleMat = new THREE.PointsMaterial({
+      color: 0x000000,
+      size: 0.04,
+      transparent: true,
+      opacity: 0.5,
+    });
+    const particles = new THREE.Points(particleGeo, particleMat);
+    scene.add(particles);
+
+    // Mouse tracking
+    let mouseX = 0;
+    let mouseY = 0;
+    let targetX = 0;
+    let targetY = 0;
+
+    const onMouseMove = (e: MouseEvent) => {
+      const rect = container.getBoundingClientRect();
+      mouseX = ((e.clientX - rect.left) / width) * 2 - 1;
+      mouseY = -((e.clientY - rect.top) / height) * 2 + 1;
+    };
+
+    window.addEventListener('mousemove', onMouseMove);
+
+    let animId: number;
+    const animate = () => {
+      animId = requestAnimationFrame(animate);
+
+      targetX += (mouseX - targetX) * 0.05;
+      targetY += (mouseY - targetY) * 0.05;
+
+      coreMesh.rotation.y += 0.005;
+      coreMesh.rotation.x += 0.003;
+      coreMesh.rotation.y += targetX * 0.02;
+      coreMesh.rotation.x -= targetY * 0.02;
+
+      ring1.rotation.z += 0.008;
+      ring2.rotation.x += 0.006;
+      ring3.rotation.y += 0.007;
+
+      particles.rotation.y += 0.004;
+
+      renderer.render(scene, camera);
+    };
+
+    animate();
+
+    const handleResize = () => {
+      if (!container) return;
+      const newW = container.clientWidth;
+      const newH = container.clientHeight;
+      camera.aspect = newW / newH;
+      camera.updateProjectionMatrix();
+      renderer.setSize(newW, newH);
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      cancelAnimationFrame(animId);
+      window.removeEventListener('mousemove', onMouseMove);
+      window.removeEventListener('resize', handleResize);
+      if (container.contains(renderer.domElement)) {
+        container.removeChild(renderer.domElement);
+      }
+      coreGeo.dispose();
+      coreMat.dispose();
+      ring1Geo.dispose();
+      ring1Mat.dispose();
+      ring2Geo.dispose();
+      ring2Mat.dispose();
+      ring3Geo.dispose();
+      ring3Mat.dispose();
+      particleGeo.dispose();
+      particleMat.dispose();
+      renderer.dispose();
+    };
+  }, []);
 
   return (
-    <div className="fixed inset-0 z-0 pointer-events-none perspective-[1000px]">
-      <motion.div 
-        style={{ rotateX, translateZ, opacity }}
-        className="absolute inset-x-0 bottom-[-50%] h-[200%] origin-bottom"
-      >
-        <div className="w-full h-full" style={{ 
-          backgroundImage: `linear-gradient(to right, #f59e0b 1px, transparent 1px), 
-                           linear-gradient(to bottom, #f59e0b 1px, transparent 1px)`,
-          backgroundSize: '80px 80px',
-          maskImage: 'linear-gradient(to top, black, transparent 80%)'
-        }} />
-      </motion.div>
-    </div>
+    <div 
+      ref={mountRef} 
+      className="w-full h-full min-h-[260px] md:min-h-[320px] flex items-center justify-center pointer-events-none select-none relative"
+    />
   );
-};
+}
 
-const QuantumHUD = () => {
-  const { scrollYProgress } = useScroll();
-  const scaleY = useSpring(scrollYProgress, { stiffness: 40, damping: 15 });
-
-  return (
-    <>
-      {/* Left HUD */}
-      <div className="fixed left-8 top-1/2 -translate-y-1/2 z-40 hidden xl:flex flex-col items-center gap-10">
-        <div className="flex flex-col items-center gap-2">
-          <div className="w-1 h-32 bg-white/5 rounded-full overflow-hidden">
-            <motion.div style={{ scaleY }} className="w-full h-full bg-amber-500 origin-top shadow-[0_0_15px_#f59e0b]" />
-          </div>
-          <span className="text-[8px] font-black uppercase tracking-[0.5em] vertical-text text-white/20">Sync Progress</span>
-        </div>
-        <div className="flex flex-col gap-6">
-          <Radio size={12} className="text-amber-500 animate-pulse" />
-          <Fingerprint size={12} className="text-white/20" />
-          <Globe size={12} className="text-white/20" />
-        </div>
-      </div>
-
-      {/* Right HUD */}
-      <div className="fixed right-8 top-1/2 -translate-y-1/2 z-40 hidden xl:flex flex-col items-center gap-10">
-        <div className="space-y-1">
-          {Array.from({ length: 12 }).map((_, i) => (
-            <motion.div 
-              key={i}
-              animate={{ opacity: [0.1, 0.5, 0.1], scaleX: [1, 1.5, 1] }}
-              transition={{ duration: 3, repeat: Infinity, delay: i * 0.1, ease: "easeInOut" }}
-              className="w-8 h-[2px] bg-amber-500/40 rounded-full"
-            />
-          ))}
-        </div>
-        <div className="vertical-text text-[8px] font-black uppercase tracking-[0.5em] text-white/20">Neural Synapse v4.0</div>
-      </div>
-    </>
-  );
-};
-
-const HoloCard = ({ children, className = "", delay = 0 }: { children: React.ReactNode, className?: string, delay?: number }) => {
-  const cardRef = useRef<HTMLDivElement>(null);
+// ─── 3D PARALLAX TILT CARD ──────────────────────────────────────────────────
+function Tilt3DCard({ children, className = "" }: { children: React.ReactNode; className?: string }) {
   const x = useMotionValue(0);
   const y = useMotionValue(0);
-  const rotateX = useSpring(useTransform(y, [-100, 100], [10, -10]), { stiffness: 100, damping: 30 });
-  const rotateY = useSpring(useTransform(x, [-100, 100], [-10, 10]), { stiffness: 100, damping: 30 });
+
+  const rotateX = useSpring(useTransform(y, [-100, 100], [7, -7]), { stiffness: 120, damping: 25 });
+  const rotateY = useSpring(useTransform(x, [-100, 100], [-7, 7]), { stiffness: 120, damping: 25 });
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    const rect = cardRef.current?.getBoundingClientRect();
-    if (rect) {
-      x.set(e.clientX - (rect.left + rect.width / 2));
-      y.set(e.clientY - (rect.top + rect.height / 2));
-    }
+    const rect = e.currentTarget.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+    x.set(e.clientX - centerX);
+    y.set(e.clientY - centerY);
   };
 
   const handleMouseLeave = () => {
@@ -140,510 +283,513 @@ const HoloCard = ({ children, className = "", delay = 0 }: { children: React.Rea
 
   return (
     <motion.div
-      ref={cardRef}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      initial={{ opacity: 0, y: 30, scale: 0.98 }}
-      whileInView={{ opacity: 1, y: 0, scale: 1 }}
-      viewport={{ once: true, margin: "-50px" }}
-      transition={{ duration: 1.2, delay, ease: [0.16, 1, 0.3, 1] }}
-      style={{ rotateX, rotateY, transformStyle: "preserve-3d", willChange: "transform" }}
-      className={`relative group rounded-[3.5rem] border border-white/5 bg-white/[0.02] backdrop-blur-3xl p-10 transition-colors duration-700 hover:border-amber-500/30 holo-card-reveal ${className}`}
+      style={{
+        rotateX,
+        rotateY,
+        transformStyle: 'preserve-3d',
+      }}
+      className={`relative group transition-shadow duration-500 will-change-transform ${className}`}
     >
-      <div style={{ transform: "translateZ(50px)" }} className="relative z-10 h-full">
-        {children}
-      </div>
-      
-      {/* Dynamic Glow */}
-      <motion.div 
-        className="pointer-events-none absolute -inset-px rounded-[3.5rem] opacity-0 group-hover:opacity-100 transition-opacity duration-700"
-        style={{
-          background: useTransform(
-            [x, y],
-            ([mx, my]: any) => `radial-gradient(800px circle at ${(mx as number) + 200}px ${(my as number) + 200}px, rgba(245, 158, 11, 0.1), transparent 80%)`
-          ),
-        }}
-      />
+      {children}
     </motion.div>
   );
-};
-
-// --- NEW GOD-LEVEL SINGULARITY COMPONENT ---
-const SingularityCore = ({ value }: { value: number }) => {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-
-  const handleMouseMove = (e: React.MouseEvent) => {
-    const rect = containerRef.current?.getBoundingClientRect();
-    if (rect) {
-      mouseX.set(e.clientX - rect.left - rect.width / 2);
-      mouseY.set(e.clientY - rect.top - rect.height / 2);
-    }
-  };
-
-  const rotateX = useSpring(useTransform(mouseY, [-200, 200], [15, -15]), { stiffness: 50, damping: 20 });
-  const rotateY = useSpring(useTransform(mouseX, [-200, 200], [-15, 15]), { stiffness: 50, damping: 20 });
-
-  return (
-    <div 
-      ref={containerRef}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={() => { mouseX.set(0); mouseY.set(0); }}
-      className="relative w-full h-full flex items-center justify-center perspective-[1000px] overflow-hidden"
-    >
-      {/* Background Matrix Rain */}
-      <div className="absolute inset-0 overflow-hidden opacity-10 pointer-events-none">
-        {Array.from({ length: 15 }).map((_, i) => (
-          <motion.div
-            key={i}
-            initial={{ y: -100 }}
-            animate={{ y: [0, 400] }}
-            transition={{ duration: Math.random() * 5 + 3, repeat: Infinity, ease: "linear", delay: Math.random() * 2 }}
-            className="absolute text-[8px] font-mono text-amber-500/40 whitespace-nowrap"
-            style={{ left: `${i * 7}%` }}
-          >
-            {Array.from({ length: 20 }).map(() => Math.random() > 0.5 ? '1' : '0').join('\n')}
-          </motion.div>
-        ))}
-      </div>
-
-      {/* Kinetic Rings */}
-      <motion.div style={{ rotateX, rotateY, transformStyle: "preserve-3d" }} className="relative">
-        <motion.div 
-          animate={{ rotateZ: 360 }}
-          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-          className="absolute inset-[-80px] border-2 border-dashed border-amber-500/10 rounded-full"
-        />
-        <motion.div 
-          animate={{ rotateZ: -360 }}
-          transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-          className="absolute inset-[-50px] border border-white/5 rounded-full"
-        />
-        
-        {/* Central Singularity */}
-        <div style={{ transform: "translateZ(100px)" }} className="relative text-center">
-          <motion.div
-            animate={{ 
-              scale: [1, 1.02, 1],
-              filter: ["blur(0px)", "blur(1px)", "blur(0px)"]
-            }}
-            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-            className="text-[10rem] font-black italic tracking-tighter text-white drop-shadow-[0_0_40px_rgba(245,158,11,0.4)]"
-          >
-            {value}
-          </motion.div>
-          <div className="mt-2 text-[10px] font-black uppercase tracking-[1em] text-amber-500/60 drop-shadow-[0_0_10px_#f59e0b]">
-            Decryptions
-          </div>
-        </div>
-
-        {/* Floating Metadata Particles */}
-        {['CORE_HEAT: 42.1C', 'LOGIC: STABLE', 'SYNC: 100%', 'SECTOR: 7G'].map((text, i) => (
-          <motion.div
-            key={text}
-            style={{ 
-              transform: `translateZ(${60 + i * 15}px)`,
-              top: i % 2 === 0 ? '-100px' : '160px',
-              left: i < 2 ? '-140px' : '140px'
-            }}
-            animate={{ 
-              y: [0, -15, 0],
-              opacity: [0.1, 0.3, 0.1]
-            }}
-            transition={{ duration: 5, repeat: Infinity, delay: i * 0.8, ease: "easeInOut" }}
-            className="absolute text-[7px] font-mono text-white/40 whitespace-nowrap border border-white/5 px-3 py-1.5 rounded-full bg-black/40 backdrop-blur-xl"
-          >
-            {text}
-          </motion.div>
-        ))}
-      </motion.div>
-
-      {/* Corner Brackets */}
-      <div className="absolute top-8 left-8 w-10 h-10 border-t-2 border-l-2 border-amber-500/20 rounded-tl-2xl" />
-      <div className="absolute top-8 right-8 w-10 h-10 border-t-2 border-r-2 border-amber-500/20 rounded-tr-2xl" />
-      <div className="absolute bottom-8 left-8 w-10 h-10 border-b-2 border-l-2 border-amber-500/20 rounded-bl-2xl" />
-      <div className="absolute bottom-8 right-8 w-10 h-10 border-b-2 border-r-2 border-amber-500/20 rounded-br-2xl" />
-    </div>
-  );
-};
+}
 
 export default function LeetCodeStats() {
   const navigate = useNavigate();
   const location = useLocation();
-  const [profile, setProfile] = useState<LeetCodeProfile | null>(null);
+  const [profile, setProfile] = useState<LeetCodeProfile>(FALLBACK_PROFILE);
   const [loading, setLoading] = useState(true);
-  const containerRef = useRef<HTMLDivElement>(null);
+  const [isLive, setIsLive] = useState(false);
+  const [refreshing, setRefreshing] = useState(false);
 
-  useEffect(() => {
-    // Artificial delay for cinematic loading
-    const timer = setTimeout(() => {
-      setProfile({
-        username: 'Rachit-Kakkad1',
-        totalSolved: 162,
-        easySolved: 101,
-        mediumSolved: 48,
-        hardSolved: 13,
-        ranking: 968621,
-        contributionPoints: 30,
-        reputation: 0,
-        submissionCalendar: {
-          "1756857600": 3,
-          "1758844800": 1,
-          "1759104000": 2,
-          "1762646400": 12,
-          "1762732800": 15,
-          "1762819200": 19,
-          "1763337600": 3,
-          "1763424000": 3,
-          "1763683200": 5,
-          "1763856000": 6,
-          "1764028800": 5,
-          "1767312000": 4,
-          "1768003200": 2,
-          "1768089600": 1,
-          "1769817600": 14,
-          "1770508800": 2,
-          "1770595200": 2,
-          "1770681600": 8,
-          "1770768000": 14,
-          "1770854400": 12,
-          "1771286400": 3,
-          "1771977600": 2,
-          "1772064000": 2,
-          "1772236800": 2,
-          "1772409600": 2,
-          "1772668800": 1,
-          "1772755200": 1,
-          "1772841600": 7,
-          "1772928000": 4,
-          "1773014400": 5,
-          "1773100800": 2,
-          "1773187200": 2,
-          "1773273600": 3,
-          "1773792000": 2,
-          "1774569600": 2,
-          "1774742400": 2,
-          "1774828800": 2,
-          "1774915200": 4,
-          "1775001600": 2,
-          "1775088000": 6,
-          "1775174400": 8,
-          "1775260800": 1,
-          "1775347200": 2,
-          "1775433600": 7,
-          "1775520000": 9,
-          "1775692800": 4,
-          "1775779200": 8,
-          "1775865600": 14,
-          "1775952000": 42,
-          "1776038400": 6,
-          "1776124800": 3,
-          "1776211200": 2,
-          "1776297600": 1,
-          "1776384000": 5,
-          "1776470400": 1,
-          "1776556800": 9,
-          "1776816000": 1
-        },
-      });
-      setLoading(false);
-    }, 2000);
-    return () => clearTimeout(timer);
-  }, []);
-
-  useEffect(() => {
-    if (!loading && containerRef.current) {
-      const cards = containerRef.current.querySelectorAll('.holo-card-reveal');
-      gsap.fromTo(cards, 
-        { opacity: 0, y: 50, scale: 0.95 },
-        { 
-          opacity: 1, 
-          y: 0, 
-          scale: 1, 
-          duration: 1.5, 
-          stagger: 0.15, 
-          ease: "expo.out",
-          scrollTrigger: {
-            trigger: containerRef.current,
-            start: "top 80%",
+  const fetchStats = async (forceRefresh = false) => {
+    if (forceRefresh) setRefreshing(true);
+    
+    try {
+      if (!forceRefresh) {
+        const cached = localStorage.getItem(CACHE_KEY);
+        if (cached) {
+          const parsed = JSON.parse(cached);
+          if (Date.now() - parsed.timestamp < CACHE_DURATION) {
+            setProfile(parsed.data);
+            setIsLive(true);
+            setLoading(false);
+            return;
           }
         }
-      );
+      }
+
+      // Fetch live profile from Alfa LeetCode API
+      const res = await fetch(`https://alfa-leetcode-api.onrender.com/userProfile/${LEETCODE_USERNAME}`);
+      if (!res.ok) throw new Error('Failed to fetch LeetCode user profile');
+      
+      const data = await res.json();
+      
+      const liveProfile: LeetCodeProfile = {
+        username: LEETCODE_USERNAME,
+        totalSolved: data.totalSolved || data.solvedProblem || 274,
+        totalQuestions: data.totalQuestions || 4041,
+        easySolved: data.easySolved || 185,
+        totalEasy: data.totalEasy || 962,
+        mediumSolved: data.mediumSolved || 75,
+        totalMedium: data.totalMedium || 2109,
+        hardSolved: data.hardSolved || 14,
+        totalHard: data.totalHard || 970,
+        ranking: data.ranking || 565810,
+        contributionPoints: data.contributionPoint || 124,
+        reputation: data.reputation || 0,
+        submissionCalendar: data.submissionCalendar || FALLBACK_PROFILE.submissionCalendar,
+        recentSubmissions: data.recentSubmissions && data.recentSubmissions.length > 0 
+          ? data.recentSubmissions 
+          : FALLBACK_PROFILE.recentSubmissions
+      };
+
+      localStorage.setItem(CACHE_KEY, JSON.stringify({
+        timestamp: Date.now(),
+        data: liveProfile
+      }));
+
+      setProfile(liveProfile);
+      setIsLive(true);
+    } catch (error) {
+      console.warn('Error fetching live LeetCode stats, using local cache / fallback:', error);
+      const cached = localStorage.getItem(CACHE_KEY);
+      if (cached) {
+        try {
+          const parsed = JSON.parse(cached);
+          setProfile(parsed.data);
+          setIsLive(true);
+        } catch {
+          setProfile(FALLBACK_PROFILE);
+          setIsLive(false);
+        }
+      } else {
+        setProfile(FALLBACK_PROFILE);
+        setIsLive(false);
+      }
+    } finally {
+      setLoading(false);
+      setRefreshing(false);
     }
-  }, [loading]);
+  };
+
+  useEffect(() => {
+    fetchStats();
+  }, []);
 
   const handleReturn = () => {
     window.dispatchEvent(new CustomEvent('trigger-transition', { 
-      detail: { name: 'De-initializing Matrix', target: 'home' } 
+      detail: { name: 'Returning Home', target: 'home' } 
     }));
     const scrollTo = (location.state as any)?.fromSection || 'home';
     setTimeout(() => navigate('/', { state: { skipIntro: true, scrollTo } }), 400);
   };
 
+  const timeAgo = (timestampStr: string) => {
+    const ts = parseInt(timestampStr, 10);
+    if (isNaN(ts)) return 'recently';
+    const seconds = Math.floor(Date.now() / 1000 - ts);
+    if (seconds < 60) return 'just now';
+    const minutes = Math.floor(seconds / 60);
+    if (minutes < 60) return `${minutes}m ago`;
+    const hours = Math.floor(minutes / 60);
+    if (hours < 24) return `${hours}h ago`;
+    const days = Math.floor(hours / 24);
+    if (days === 1) return 'yesterday';
+    if (days < 30) return `${days}d ago`;
+    const months = Math.floor(days / 30);
+    return `${months}mo ago`;
+  };
+
+  const totalSubmissionsInCalendar = Object.values(profile.submissionCalendar || {}).reduce((a, b) => a + b, 0);
+  const activeDaysCount = Object.keys(profile.submissionCalendar || {}).length;
+
   return (
-    <main ref={containerRef} className="relative min-h-screen bg-[#020202] text-white selection:bg-amber-500 selection:text-black overflow-x-hidden">
+    <main className="min-h-screen bg-[#F6F3EE] text-[#1C1C1C] selection:bg-[#B45309] selection:text-white pb-32 overflow-x-hidden relative">
       <Helmet>
-        <title>LeetCode Stats | Rachit Kakkad</title>
-        <meta name="description" content="LeetCode problem-solving stats of Rachit Kakkad — DSA practice in C++." />
+        <title>LeetCode Problem Solving Record | Rachit Kakkad</title>
+        <meta name="description" content="Live LeetCode algorithm practice record of Rachit Kakkad. Solved 274+ DSA and SQL problems in C++ and MySQL." />
         <link rel="canonical" href="https://rachit-hk-portfolio.vercel.app/leetcode-stats" />
       </Helmet>
-      <SEO title="Neural Singularity | LeetCode Command" />
-      <PerspectiveGrid />
-      <QuantumHUD />
+      <SEO title="LeetCode Problem Solving Record | Rachit Kakkad" />
 
-      <AnimatePresence mode="wait">
-        {loading ? (
-          <motion.section 
-            key="loader"
-            exit={{ opacity: 0, filter: "blur(20px)", scale: 1.1 }}
-            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-            className="fixed inset-0 z-[100] bg-black flex flex-col items-center justify-center p-10"
+      {/* Subtle Background Watermark Typography */}
+      <div className="fixed inset-0 flex items-center justify-center pointer-events-none z-0 overflow-hidden opacity-[0.02]">
+        <span className="text-[26vw] font-black text-black select-none tracking-tighter uppercase font-serif">
+          LEETCODE
+        </span>
+      </div>
+
+      {/* Sticky Editorial Header */}
+      <nav className="fixed top-0 left-0 w-full z-[100] px-6 md:px-12 py-5 flex items-center justify-between bg-[#F6F3EE]/90 backdrop-blur-xl border-b border-black/10 transition-all shadow-sm">
+        <div className="flex items-center gap-3.5">
+          <div className="w-9 h-9 rounded-xl bg-[#FFA116]/20 border border-[#FFA116]/40 flex items-center justify-center text-[#B45309] shadow-sm">
+            <LeetCode size={18} />
+          </div>
+          <div className="flex flex-col">
+            <span className="text-[10px] font-black uppercase tracking-widest text-[#B45309] font-serif">Algorithmic Ledger</span>
+            <span className="text-sm md:text-base font-black uppercase tracking-tight text-black">LeetCode Analytics</span>
+          </div>
+        </div>
+
+        <div className="flex items-center gap-3">
+          <button
+            onClick={() => fetchStats(true)}
+            disabled={refreshing}
+            className="p-2.5 rounded-full border border-black/10 bg-white/80 text-black/60 hover:text-black hover:border-black/30 hover:bg-white transition-all shadow-sm disabled:opacity-50"
+            title="Refresh Live Data"
+            aria-label="Refresh Live Data"
           >
-            <div className="relative w-64 h-64 mb-16">
-              <motion.div 
-                animate={{ rotate: 360, scale: [1, 1.1, 1] }}
-                transition={{ duration: 5, repeat: Infinity, ease: "linear" }}
-                className="absolute inset-0 border-2 border-dashed border-amber-500/20 rounded-full"
-              />
-              <motion.div 
-                animate={{ rotate: -360 }}
-                transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
-                className="absolute inset-8 border border-white/5 rounded-full"
-              />
-              <div className="absolute inset-0 flex items-center justify-center">
-                <LeetCode size={64} className="text-amber-500 drop-shadow-[0_0_20px_rgba(245,158,11,0.6)] animate-pulse" />
-              </div>
-            </div>
-            <div className="space-y-6 text-center">
-              <h2 className="text-[10px] font-black uppercase tracking-[1.5em] text-white/30">Neural Hub v4.0.26</h2>
-              <div className="text-4xl font-black italic tracking-tighter uppercase overflow-hidden">
-                <motion.div
-                  initial={{ y: "100%" }}
-                  animate={{ y: 0 }}
-                  transition={{ duration: 0.8, ease: "circOut" }}
-                >
-                  <ScrambleText text="SYNCHRONIZING..." />
-                </motion.div>
-              </div>
-            </div>
-          </motion.section>
-        ) : (
-          <motion.div 
-            key="content"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1.5 }}
-            className="relative z-10 pb-60"
+            <RefreshCw size={14} className={refreshing ? 'animate-spin' : ''} />
+          </button>
+
+          <button 
+            onClick={handleReturn}
+            className="group flex items-center gap-2 px-5 py-2.5 bg-black text-white font-serif uppercase text-[10px] md:text-xs font-black tracking-widest hover:bg-[#B45309] transition-all shadow-[3px_3px_0px_rgba(0,0,0,0.15)] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px] rounded-sm"
           >
-            {/* HERO - APEX SINGULARITY */}
-            <header className="relative h-screen flex flex-col items-center justify-center px-6 text-center overflow-hidden">
-              <motion.div 
-                initial={{ opacity: 0, y: 50, scale: 0.9 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
-                transition={{ duration: 2.5, ease: [0.16, 1, 0.3, 1] }}
-                className="relative z-10 space-y-16"
+            <ArrowLeft size={14} className="group-hover:-translate-x-1 transition-transform" />
+            <span>Back to Front Page</span>
+          </button>
+        </div>
+      </nav>
+
+      <div className="max-w-[1440px] mx-auto px-6 md:px-12 pt-36 md:pt-40 relative z-10">
+
+        {/* Newspaper / Editorial Title Banner with Interactive 3D Algorithmic Core */}
+        <div className="w-full mb-12 border-b-4 border-black pb-8 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          <div className="lg:col-span-8">
+            <div className="flex flex-wrap items-center gap-4 mb-4">
+              <div className="flex items-center gap-2 px-3 py-1 bg-black/5 border border-black/10 rounded-full">
+                <span className={`w-2 h-2 rounded-full ${isLive ? 'bg-green-600 animate-pulse' : 'bg-amber-600'}`} />
+                <span className="text-[10px] font-black uppercase tracking-widest text-black/70 font-mono">
+                  {isLive ? 'Live Sync Active' : 'Cached Feed'} • @{profile.username}
+                </span>
+              </div>
+
+              <a
+                href={`https://leetcode.com/u/${LEETCODE_USERNAME}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#B45309] hover:text-black transition-colors"
               >
-                <div className="inline-flex items-center gap-4 px-8 py-3 rounded-full bg-white/5 border border-white/10 backdrop-blur-3xl shadow-[0_0_40px_rgba(0,0,0,0.5)]">
-                  <LeetCode size={16} className="text-amber-500 shadow-[0_0_15px_#f59e0b]" />
-                  <span className="text-[10px] font-black uppercase tracking-[0.6em] text-white/60">Neural Identity: {profile?.username}</span>
-                </div>
+                <span>View Official Profile</span>
+                <ExternalLink size={13} />
+              </a>
+            </div>
 
-                <div className="space-y-4">
-                  <h1 className="text-[clamp(4rem,18vw,16rem)] font-black leading-[0.8] tracking-tighter uppercase italic">
-                    Neural<br />
-                    <span className="text-transparent bg-clip-text bg-gradient-to-b from-white via-white/80 to-white/5 drop-shadow-2xl">Entropy</span>
-                  </h1>
-                </div>
+            <h1 className="text-[clamp(2.8rem,7.5vw,84px)] font-black tracking-tight leading-[0.88] text-black uppercase font-serif">
+              Algorithmic <span className="text-[#B45309]">Discipline</span>
+            </h1>
+            <p className="mt-4 max-w-2xl font-serif italic text-sm md:text-base text-black/70 leading-relaxed">
+              Real-time telemetry of problem-solving velocity, algorithmic complexity distribution, data structures mastery, and competitive programming streaks.
+            </p>
+          </div>
 
-                <p className="max-w-3xl mx-auto text-sm md:text-xl text-white/40 font-medium tracking-tight leading-relaxed">
-                  A high-fidelity visualization of cross-functional algorithmic logic and multi-tier structural engineering performance metrics.
-                </p>
-              </motion.div>
+          {/* Interactive 3D Algorithmic Core Widget */}
+          <div className="lg:col-span-4 flex items-center justify-center relative">
+            <div className="relative w-full aspect-square max-w-[280px] bg-white/60 border border-black/10 rounded-3xl p-4 shadow-[4px_4px_0px_rgba(0,0,0,0.06)] flex flex-col items-center justify-center overflow-hidden">
+              <div className="absolute top-3 left-4 text-[9px] font-mono font-bold uppercase tracking-widest text-black/40">
+                3D Algorithmic Core
+              </div>
+              <Interactive3DAlgorithmicCore />
+              <div className="absolute bottom-3 text-[9px] font-mono text-black/40 flex items-center gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-ping" />
+                Kinetic Multi-Tier Matrix
+              </div>
+            </div>
+          </div>
+        </div>
 
-              {/* Decorative Scan Line */}
-              <motion.div 
-                animate={{ top: ["-10%", "110%"] }}
-                transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
-                className="absolute left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-amber-500/40 to-transparent z-0 blur-[1px]"
-              />
-            </header>
-
-            {/* BENTO APEX */}
-            <section className="max-w-[1600px] mx-auto px-6 grid grid-cols-1 md:grid-cols-12 gap-10 auto-rows-[280px]">
+        {/* Top Bento Row: Grand Total Hero Card + 3D Difficulty Cards */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-10">
+          
+          {/* Main Card: Grand Total Solved with 3D Tilt */}
+          <Tilt3DCard className="lg:col-span-5 h-full">
+            <div className="bg-white/95 border-2 border-black rounded-3xl p-8 md:p-10 shadow-[6px_6px_0px_rgba(0,0,0,0.1)] flex flex-col justify-between h-full relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-36 h-36 bg-[#FFA116]/10 rounded-bl-[100px] pointer-events-none" />
               
-              {/* SINGULARITY CORE - TOTAL SOLVED (The New God-Tier Piece) */}
-              <HoloCard className="md:col-span-8 md:row-span-2 overflow-hidden bg-black/40 border-amber-500/10">
-                <SingularityCore value={profile?.totalSolved || 0} />
-              </HoloCard>
+              <div>
+                <div className="flex items-center justify-between mb-6">
+                  <span className="text-[11px] font-black uppercase tracking-[0.25em] text-black/40 font-mono">Total Solved</span>
+                  <div className="px-3 py-1 bg-[#FFA116]/20 border border-[#FFA116]/40 rounded-full text-[#B45309] font-black text-[10px] uppercase tracking-wider">
+                    Top {(profile.ranking ? (profile.ranking / 4000000) * 100 : 14.1).toFixed(1)}% Global
+                  </div>
+                </div>
 
-              {/* Efficiency Hub */}
-              <HoloCard className="md:col-span-4 md:row-span-2 flex flex-col items-center justify-center gap-16 text-center border-amber-500/20 bg-amber-500/[0.02]">
-                <div className="relative w-64 h-64 group/gauge">
-                  <svg className="w-full h-full -rotate-90 filter drop-shadow-[0_0_20px_rgba(245,158,11,0.2)]" viewBox="0 0 100 100">
-                    <circle cx="50" cy="50" r="46" fill="none" stroke="white" strokeWidth="0.5" className="opacity-10" />
-                    <motion.circle 
-                      cx="50" cy="50" r="46" fill="none" stroke="#f59e0b" strokeWidth="6" 
-                      strokeDasharray="289"
-                      initial={{ strokeDashoffset: 289 }}
-                      whileInView={{ strokeDashoffset: 289 - (289 * (profile?.contributionPoints || 0)) / 100 }}
-                      transition={{ duration: 3.5, ease: [0.16, 1, 0.3, 1] }}
-                      strokeLinecap="round"
-                    />
-                  </svg>
-                  <div className="absolute inset-0 flex flex-col items-center justify-center">
+                <div className="flex items-baseline gap-3 mb-4">
+                  <span className="text-7xl md:text-8xl font-black tracking-tighter text-black font-serif">
+                    {profile.totalSolved}
+                  </span>
+                  <span className="text-xl md:text-2xl font-serif italic text-black/30">
+                    / {profile.totalQuestions}
+                  </span>
+                </div>
+
+                <p className="text-xs md:text-sm text-black/60 font-serif leading-relaxed mb-6">
+                  Active problem solver practicing dynamic programming, graph theory, trees, binary search, and optimized SQL schema queries.
+                </p>
+              </div>
+
+              <div className="pt-6 border-t border-black/10 grid grid-cols-2 gap-4">
+                <div>
+                  <div className="text-[10px] font-black uppercase tracking-wider text-black/40 font-mono mb-1">Global Ranking</div>
+                  <div className="text-xl font-black text-black font-serif">
+                    #{profile.ranking ? profile.ranking.toLocaleString() : '565,810'}
+                  </div>
+                </div>
+                <div>
+                  <div className="text-[10px] font-black uppercase tracking-wider text-black/40 font-mono mb-1">Contribution</div>
+                  <div className="text-xl font-black text-[#B45309] font-serif">
+                    {profile.contributionPoints} pts
+                  </div>
+                </div>
+              </div>
+            </div>
+          </Tilt3DCard>
+
+          {/* Difficulty Breakdown (3 Stacked 3D Tilt Cards) */}
+          <div className="lg:col-span-7 grid grid-cols-1 md:grid-cols-3 gap-6">
+            
+            {/* EASY */}
+            <Tilt3DCard>
+              <div className="bg-white/90 border border-black/15 rounded-3xl p-6 shadow-sm flex flex-col justify-between hover:border-green-600 hover:shadow-md transition-all h-full">
+                <div>
+                  <div className="flex items-center justify-between mb-4">
+                    <span className="px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider bg-green-100 text-green-800 border border-green-200">
+                      Easy
+                    </span>
+                    <span className="text-xs font-mono text-black/40">{Math.round((profile.easySolved / profile.totalSolved) * 100)}%</span>
+                  </div>
+                  <div className="text-4xl md:text-5xl font-black text-green-700 font-serif mb-1">
+                    {profile.easySolved}
+                  </div>
+                  <div className="text-[11px] font-mono text-black/40 mb-6">of {profile.totalEasy} questions</div>
+                </div>
+                <div>
+                  <div className="w-full h-2.5 bg-black/5 rounded-full overflow-hidden mb-2 p-0.5">
                     <motion.div 
-                      initial={{ opacity: 0, scale: 0.5 }}
-                      whileInView={{ opacity: 1, scale: 1 }}
-                      transition={{ duration: 1.5, delay: 0.5 }}
-                      className="text-8xl font-black italic tracking-tighter text-amber-500"
-                    >
-                      {profile?.contributionPoints}
-                    </motion.div>
-                    <div className="text-[10px] font-black uppercase tracking-[0.6em] text-white/30">Efficiency</div>
+                      initial={{ width: 0 }}
+                      animate={{ width: `${(profile.easySolved / profile.totalEasy) * 100}%` }}
+                      transition={{ duration: 1.2, ease: "easeOut" }}
+                      className="h-full bg-green-600 rounded-full shadow-xs"
+                    />
                   </div>
+                  <span className="text-[10px] font-bold text-black/50 uppercase tracking-widest">Fundamentals & Logic</span>
                 </div>
-                <div className="space-y-3">
-                  <div className="text-[11px] font-black uppercase tracking-[0.5em] text-white/30">Synaptic Ranking</div>
-                  <div className="text-2xl font-black italic tracking-tight text-white/90 uppercase">
-                    TOP {profile?.ranking ? ((profile.ranking / 4000000) * 100).toFixed(1) : '24.2'}% GLOBAL
-                  </div>
-                </div>
-              </HoloCard>
+              </div>
+            </Tilt3DCard>
 
-              {/* Complexity Matrix - Wide */}
-              <HoloCard className="md:col-span-12 md:row-span-1 bg-white/[0.01]">
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-20 h-full items-center">
-                  {[
-                    { label: 'L1: Basic', count: profile?.easySolved, color: difficultyColors.Easy },
-                    { label: 'L2: Neural', count: profile?.mediumSolved, color: difficultyColors.Medium },
-                    { label: 'L3: Apex', count: profile?.hardSolved, color: difficultyColors.Hard }
-                  ].map((tier, idx) => (
-                    <div key={tier.label} className="space-y-6">
-                      <div className="flex justify-between items-end">
-                        <span className="text-[11px] font-black uppercase tracking-[0.4em] text-white/30">{tier.label}</span>
-                        <span className="text-4xl font-black italic tracking-tighter" style={{ color: tier.color }}>{tier.count}</span>
+            {/* MEDIUM */}
+            <Tilt3DCard>
+              <div className="bg-white/90 border border-black/15 rounded-3xl p-6 shadow-sm flex flex-col justify-between hover:border-amber-600 hover:shadow-md transition-all h-full">
+                <div>
+                  <div className="flex items-center justify-between mb-4">
+                    <span className="px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider bg-amber-100 text-amber-800 border border-amber-200">
+                      Medium
+                    </span>
+                    <span className="text-xs font-mono text-black/40">{Math.round((profile.mediumSolved / profile.totalSolved) * 100)}%</span>
+                  </div>
+                  <div className="text-4xl md:text-5xl font-black text-amber-700 font-serif mb-1">
+                    {profile.mediumSolved}
+                  </div>
+                  <div className="text-[11px] font-mono text-black/40 mb-6">of {profile.totalMedium} questions</div>
+                </div>
+                <div>
+                  <div className="w-full h-2.5 bg-black/5 rounded-full overflow-hidden mb-2 p-0.5">
+                    <motion.div 
+                      initial={{ width: 0 }}
+                      animate={{ width: `${(profile.mediumSolved / profile.totalMedium) * 100}%` }}
+                      transition={{ duration: 1.2, delay: 0.1, ease: "easeOut" }}
+                      className="h-full bg-amber-500 rounded-full shadow-xs"
+                    />
+                  </div>
+                  <span className="text-[10px] font-bold text-black/50 uppercase tracking-widest">Optimization & DSA</span>
+                </div>
+              </div>
+            </Tilt3DCard>
+
+            {/* HARD */}
+            <Tilt3DCard>
+              <div className="bg-white/90 border border-black/15 rounded-3xl p-6 shadow-sm flex flex-col justify-between hover:border-red-600 hover:shadow-md transition-all h-full">
+                <div>
+                  <div className="flex items-center justify-between mb-4">
+                    <span className="px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider bg-red-100 text-red-800 border border-red-200">
+                      Hard
+                    </span>
+                    <span className="text-xs font-mono text-black/40">{Math.round((profile.hardSolved / profile.totalSolved) * 100)}%</span>
+                  </div>
+                  <div className="text-4xl md:text-5xl font-black text-red-700 font-serif mb-1">
+                    {profile.hardSolved}
+                  </div>
+                  <div className="text-[11px] font-mono text-black/40 mb-6">of {profile.totalHard} questions</div>
+                </div>
+                <div>
+                  <div className="w-full h-2.5 bg-black/5 rounded-full overflow-hidden mb-2 p-0.5">
+                    <motion.div 
+                      initial={{ width: 0 }}
+                      animate={{ width: `${(profile.hardSolved / profile.totalHard) * 100}%` }}
+                      transition={{ duration: 1.2, delay: 0.2, ease: "easeOut" }}
+                      className="h-full bg-red-600 rounded-full shadow-xs"
+                    />
+                  </div>
+                  <span className="text-[10px] font-bold text-black/50 uppercase tracking-widest">Complex Paradigms</span>
+                </div>
+              </div>
+            </Tilt3DCard>
+
+          </div>
+        </div>
+
+        {/* Middle Row: Badges & Activity Summary with 3D Tilt */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-14">
+          
+          <Tilt3DCard>
+            <div className="bg-white/90 border border-black/10 rounded-3xl p-6 flex items-center gap-5 shadow-sm hover:shadow-md transition-all h-full">
+              <div className="w-16 h-16 rounded-2xl bg-amber-50 border border-amber-200 flex items-center justify-center text-amber-700 shrink-0 shadow-xs">
+                <Award size={32} />
+              </div>
+              <div>
+                <span className="text-[9px] font-black uppercase tracking-widest text-[#B45309] font-mono">Official Badge</span>
+                <h3 className="text-lg font-black text-black font-serif">50 Days Badge 2026</h3>
+                <p className="text-xs text-black/50 font-serif">Awarded for consistent daily algorithm resolution</p>
+              </div>
+            </div>
+          </Tilt3DCard>
+
+          <Tilt3DCard>
+            <div className="bg-white/90 border border-black/10 rounded-3xl p-6 flex items-center gap-5 shadow-sm hover:shadow-md transition-all h-full">
+              <div className="w-16 h-16 rounded-2xl bg-blue-50 border border-blue-200 flex items-center justify-center text-blue-700 shrink-0 shadow-xs">
+                <Code2 size={32} />
+              </div>
+              <div>
+                <span className="text-[9px] font-black uppercase tracking-widest text-blue-700 font-mono">Specialized Track</span>
+                <h3 className="text-lg font-black text-black font-serif">Intro to Pandas</h3>
+                <p className="text-xs text-black/50 font-serif">Certified data manipulation & frame analysis</p>
+              </div>
+            </div>
+          </Tilt3DCard>
+
+          <Tilt3DCard>
+            <div className="bg-white/90 border border-black/10 rounded-3xl p-6 flex items-center gap-5 shadow-sm hover:shadow-md transition-all h-full">
+              <div className="w-16 h-16 rounded-2xl bg-green-50 border border-green-200 flex items-center justify-center text-green-700 shrink-0 shadow-xs">
+                <Flame size={32} />
+              </div>
+              <div>
+                <span className="text-[9px] font-black uppercase tracking-widest text-green-700 font-mono">Practice Volume</span>
+                <h3 className="text-lg font-black text-black font-serif">{totalSubmissionsInCalendar || 511} Submissions</h3>
+                <p className="text-xs text-black/50 font-serif">Recorded across {activeDaysCount} active solve days</p>
+              </div>
+            </div>
+          </Tilt3DCard>
+
+        </div>
+
+        {/* Section: Live Recent Submissions Log */}
+        <div className="mb-16">
+          <div className="flex items-center gap-4 mb-8 border-b-2 border-black/10 pb-4">
+            <div className="w-7 h-7 rounded-lg bg-black text-white flex items-center justify-center text-xs font-black font-mono shadow-sm">
+              §
+            </div>
+            <h2 className="text-3xl md:text-4xl font-black text-black font-serif uppercase tracking-tight">
+              Live Recent <span className="text-[#B45309]">Submissions</span>
+            </h2>
+            <div className="flex-1 h-px bg-black/10" />
+            <span className="text-xs font-mono font-bold text-black/40 uppercase hidden sm:block">
+              {profile.recentSubmissions.length} Logged Entries
+            </span>
+          </div>
+
+          <div className="bg-white/95 border border-black/15 rounded-3xl overflow-hidden shadow-sm">
+            <div className="divide-y divide-black/5">
+              {profile.recentSubmissions.map((sub, idx) => {
+                const isAccepted = sub.statusDisplay === 'Accepted';
+                return (
+                  <div
+                    key={`${sub.titleSlug}-${idx}`}
+                    className="p-5 md:p-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 hover:bg-black/[0.02] transition-colors"
+                  >
+                    <div className="flex items-center gap-4">
+                      <div className={`w-11 h-11 rounded-2xl flex items-center justify-center shrink-0 border shadow-xs ${isAccepted ? 'bg-green-100 text-green-700 border-green-200' : 'bg-red-100 text-red-700 border-red-200'}`}>
+                        {isAccepted ? <CheckCircle2 size={20} /> : <AlertCircle size={20} />}
                       </div>
-                      <div className="relative h-2 bg-white/5 rounded-full overflow-hidden">
-                        <motion.div 
-                          initial={{ width: 0 }}
-                          whileInView={{ width: `${(tier.count! / profile?.totalSolved!) * 100}%` }}
-                          transition={{ duration: 2.5, delay: 0.2 * idx, ease: [0.16, 1, 0.3, 1] }}
-                          style={{ backgroundColor: tier.color }}
-                          className="h-full shadow-[0_0_20px_currentColor]"
-                        />
+                      <div>
+                        <a
+                          href={`https://leetcode.com/problems/${sub.titleSlug}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-base md:text-lg font-black text-black hover:text-[#B45309] transition-colors font-serif flex items-center gap-2 group"
+                        >
+                          <span>{sub.title}</span>
+                          <ExternalLink size={12} className="opacity-0 group-hover:opacity-100 transition-opacity" />
+                        </a>
+                        <div className="flex items-center gap-3 mt-1 text-xs font-mono text-black/50">
+                          <span className="uppercase font-bold text-[#B45309] bg-amber-50 px-2 py-0.5 rounded border border-amber-200">{sub.lang}</span>
+                          <span>•</span>
+                          <span>{timeAgo(sub.timestamp)}</span>
+                        </div>
                       </div>
                     </div>
-                  ))}
-                </div>
-              </HoloCard>
 
-              {/* Secondary Stats */}
-              <HoloCard className="md:col-span-6 md:row-span-1 border-indigo-500/10 hover:border-indigo-500/30">
-                <div className="flex items-center gap-10 h-full">
-                  <div className="w-24 h-24 rounded-full border border-white/10 flex items-center justify-center relative overflow-hidden group/icon">
-                    <div className="absolute inset-0 bg-indigo-500/10 blur-2xl group-hover/icon:bg-indigo-500/20 transition-colors duration-700" />
-                    <Network size={40} className="text-indigo-500 relative z-10 transition-transform duration-700 group-hover/icon:scale-110" />
+                    <div className="flex items-center gap-3 self-end md:self-center">
+                      <span className={`px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider ${isAccepted ? 'bg-green-100 text-green-800 border border-green-200' : 'bg-red-100 text-red-800 border border-red-200'}`}>
+                        {sub.statusDisplay}
+                      </span>
+                    </div>
                   </div>
-                  <div>
-                    <div className="text-[11px] font-black uppercase tracking-[0.5em] text-white/20 mb-2">Reputation Protocol</div>
-                    <div className="text-6xl font-black italic tracking-tighter text-white/90 uppercase">{profile?.reputation} Units</div>
-                  </div>
-                </div>
-              </HoloCard>
-
-              <HoloCard className="md:col-span-6 md:row-span-1 border-emerald-500/10 hover:border-emerald-500/30">
-                <div className="flex items-center gap-10 h-full">
-                  <div className="w-24 h-24 rounded-full border border-white/10 flex items-center justify-center relative overflow-hidden group/icon">
-                    <div className="absolute inset-0 bg-emerald-500/10 blur-2xl group-hover/icon:bg-emerald-500/20 transition-colors duration-700" />
-                    <Target size={40} className="text-emerald-500 relative z-10 transition-transform duration-700 group-hover/icon:scale-110" />
-                  </div>
-                  <div>
-                    <div className="text-[11px] font-black uppercase tracking-[0.5em] text-white/20 mb-2">Neural Rank</div>
-                    <div className="text-6xl font-black italic tracking-tighter text-white/90 uppercase">#{profile?.ranking?.toLocaleString()}</div>
-                  </div>
-                </div>
-              </HoloCard>
-
-            </section>
-
-            {/* ARCHIVES - APEX LIST */}
-            <section className="max-w-[1200px] mx-auto px-6 py-60">
-              <div className="space-y-20">
-                <div className="flex items-center gap-8">
-                  <motion.div 
-                    initial={{ width: 0 }}
-                    whileInView={{ width: 64 }}
-                    className="h-px bg-amber-500" 
-                  />
-                  <h2 className="text-6xl font-black italic uppercase tracking-tighter">Decryption Logs</h2>
-                </div>
-
-                <div className="grid gap-8">
-                  {[
-                    { title: 'Zigzag Conversion', diff: 'Medium', cat: 'String', score: '1,420', delay: 0.1 },
-                    { title: 'Fizz Buzz', diff: 'Easy', cat: 'Math', score: '850', delay: 0.2 },
-                    { title: 'Self Crossing', diff: 'Hard', cat: 'Geometry', score: '1,100', delay: 0.3 },
-                    { title: 'Number of Good Pairs', diff: 'Easy', cat: 'Array', score: '620', delay: 0.4 },
-                    { title: 'Convert the Temperature', diff: 'Easy', cat: 'Math', score: '540', delay: 0.5 }
-                  ].map((log, i) => (
-                    <motion.div
-                      key={log.title}
-                      initial={{ opacity: 0, x: -50 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      transition={{ duration: 1.2, delay: log.delay, ease: [0.16, 1, 0.3, 1] }}
-                      whileHover={{ x: 30, backgroundColor: "rgba(255,255,255,0.03)" }}
-                      className="group p-12 rounded-[3rem] border border-white/5 bg-white/[0.01] flex flex-col md:flex-row items-start md:items-center justify-between cursor-pointer transition-all duration-700 backdrop-blur-sm"
-                    >
-                      <div className="flex items-center gap-12">
-                        <div className="w-20 h-20 rounded-3xl bg-white/5 flex items-center justify-center group-hover:bg-amber-500/10 transition-colors duration-700">
-                          <LeetCode size={32} style={{ color: (difficultyColors as any)[log.diff] }} className="group-hover:scale-125 transition-transform duration-700 drop-shadow-[0_0_12px_currentColor]" />
-                        </div>
-                        <div>
-                          <h4 className="text-3xl font-black italic tracking-tighter group-hover:text-amber-500 transition-colors duration-700 uppercase">{log.title}</h4>
-                          <div className="flex items-center gap-8 mt-4">
-                            <span className="text-[10px] font-bold uppercase tracking-[0.3em]" style={{ color: (difficultyColors as any)[log.diff] }}>{log.diff}</span>
-                            <span className="w-1.5 h-1.5 rounded-full bg-white/10" />
-                            <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-white/30">{log.cat}</span>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="mt-8 md:mt-0 text-left md:text-right">
-                        <div className="text-[11px] font-black uppercase tracking-[0.4em] text-white/10 mb-2">Yield</div>
-                        <div className="text-3xl font-black italic group-hover:text-white transition-colors duration-700">+{log.score}</div>
-                      </div>
-                    </motion.div>
-                  ))}
-                </div>
-              </div>
-            </section>
-
-            {/* EXIT PROTOCOL */}
-            <section className="py-60 flex flex-col items-center">
-              <motion.button 
-                onClick={handleReturn}
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
-                className="group relative w-64 h-64 rounded-full flex items-center justify-center overflow-hidden"
-              >
-                <div className="absolute inset-0 border-2 border-dashed border-white/10 rounded-full animate-[spin_30s_linear_infinite]" />
-                <div className="absolute inset-4 bg-white rounded-full translate-y-full group-hover:translate-y-0 transition-transform duration-[0.8s] ease-[0.16,1,0.3,1]" />
-                <div className="relative z-10 flex flex-col items-center gap-4 group-hover:text-black transition-colors duration-[0.8s] ease-[0.16,1,0.3,1]">
-                  <ArrowLeft size={40} className="group-hover:-translate-x-2 transition-transform duration-700" />
-                  <span className="text-[10px] font-black uppercase tracking-[0.6em]">Initialize Jump</span>
-                </div>
-              </motion.button>
-            </section>
-
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      <footer className="relative z-10 py-32 border-t border-white/5 text-center bg-black/40 backdrop-blur-md">
-        <div className="text-[10px] font-black uppercase tracking-[2em] text-white/10 italic">
-          Rachit Kakkad — Neural Interface v4.0.26 — Optimized for Kinetic Logic
+                );
+              })}
+            </div>
+          </div>
         </div>
-      </footer>
+
+        {/* Section: Topics & Core Strengths */}
+        <div className="bg-white/90 border border-black/15 rounded-3xl p-8 md:p-10 mb-16 shadow-sm">
+          <h3 className="text-2xl font-black text-black font-serif uppercase tracking-tight mb-6">
+            Domain Focus & Problem Patterns
+          </h3>
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+            {[
+              { name: 'Arrays & Hashing', count: '60+ Solved' },
+              { name: 'Two Pointers', count: '25+ Solved' },
+              { name: 'Binary Search', count: '20+ Solved' },
+              { name: 'Dynamic Programming', count: '18+ Solved' },
+              { name: 'Trees & Graphs', count: '22+ Solved' },
+              { name: 'SQL & Database', count: '45+ Solved' }
+            ].map(topic => (
+              <div key={topic.name} className="p-4 rounded-2xl bg-[#F6F3EE] border border-black/10 hover:border-[#B45309] transition-all">
+                <div className="text-xs font-black text-black font-serif">{topic.name}</div>
+                <div className="text-[10px] font-mono text-[#B45309] font-bold mt-1">{topic.count}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Bottom CTA Banner */}
+        <div className="text-center p-12 md:p-16 bg-white/95 border-2 border-black rounded-3xl shadow-[6px_6px_0px_rgba(0,0,0,0.1)] relative overflow-hidden">
+          <div className="w-16 h-16 rounded-2xl bg-[#FFA116]/20 border border-[#FFA116]/40 flex items-center justify-center text-[#B45309] mx-auto mb-6 shadow-md">
+            <LeetCode size={36} />
+          </div>
+          <h2 className="text-3xl md:text-5xl font-black text-black font-serif uppercase tracking-tight mb-3">
+            Inspect Complete Submissions on LeetCode
+          </h2>
+          <p className="max-w-xl mx-auto text-sm md:text-base text-black/60 font-serif mb-8 leading-relaxed">
+            Access complete contest history, individual code submissions in C++ and MySQL, and continuous streak logs directly on LeetCode.
+          </p>
+          <a
+            href={`https://leetcode.com/u/${LEETCODE_USERNAME}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-3 px-8 py-4 bg-[#B45309] hover:bg-black text-white font-serif uppercase text-xs font-black tracking-widest transition-all rounded-xl shadow-md hover:scale-105"
+          >
+            <span>Open LeetCode Profile (@{profile.username})</span>
+            <ExternalLink size={16} />
+          </a>
+        </div>
+
+      </div>
     </main>
   );
 }
