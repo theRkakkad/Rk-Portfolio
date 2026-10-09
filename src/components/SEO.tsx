@@ -76,7 +76,7 @@ const SEO: React.FC<SEOProps> = ({
         "jobTitle": ROLE,
         "image": seoImage,
         "sameAs": [
-          "https://github.com/Rachit-Kakkad1",
+          "https://github.com/theRkakkad",
           "https://www.linkedin.com/in/rachit-kakkad-r29052007k",
           "https://www.youtube.com/@RachitKakkad"
         ],

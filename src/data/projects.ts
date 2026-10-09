@@ -66,7 +66,7 @@ export const PROJECT_DATA: ProjectData[] = [
     tech: ['React', 'Node.js', 'MongoDB', 'Python', 'OpenCV', 'EasyOCR'],
     year: '2026',
     image: '',
-    github: 'https://github.com/Rachit-Kakkad1/Sanjeevani',
+    github: 'https://github.com/theRkakkad/Sanjeevani',
     live: 'https://sanjeevani-healthcare.vercel.app',
     docs: '#',
     demoVideo: '#',
@@ -84,7 +84,7 @@ export const PROJECT_DATA: ProjectData[] = [
     tech: ['React', 'Node.js', 'MongoDB', 'Solidity', 'Ethereum'],
     year: '2026',
     image: '/agricert-main.jpg',
-    github: 'https://github.com/Rachit-Kakkad1/agricert-platform',
+    github: 'https://github.com/theRkakkad/agricert-platform',
     live: 'https://agricert-khaki.vercel.app',
     docs: 'https://docs.google.com/document/d/1SQXzdd0F696l9_OcGtVPnEA_DszccIw5KZ2__57ZIeY/edit?usp=sharing',
     demoVideo: '#',
@@ -101,7 +101,7 @@ export const PROJECT_DATA: ProjectData[] = [
     tech: ['Python', 'FastAPI', 'Whisper', 'FAISS', 'MiniLM'],
     year: '2026',
     image: '',
-    github: 'https://github.com/Rachit-Kakkad1/build-with-ai-hackcrux-2026',
+    github: 'https://github.com/theRkakkad/build-with-ai-hackcrux-2026',
     live: 'https://cos-cognitiveoperatingsystem.vercel.app/',
     docs: 'https://docs.google.com/document/d/1w1YYJ2Cu5fKI3OBfKgHwMGrGMzQzoGKCNKIualZrZk8/edit?usp=sharing',
     demoVideo: '#',
@@ -118,7 +118,7 @@ export const PROJECT_DATA: ProjectData[] = [
     tech: ['React', 'Node.js', 'Supabase', 'MongoDB Atlas', 'Framer Motion'],
     year: '2026',
     image: '',
-    github: 'https://github.com/Rachit-Kakkad1/Odoo_X_GV_PLM',
+    github: 'https://github.com/theRkakkad/Odoo_X_GV_PLM',
     live: 'https://plm-x-odooxgv.vercel.app/',
     docs: 'https://docs.google.com/document/d/1Yg9hS-GvHKx78EqMVn_XZEPGbSU4UotWM1XLT5FpHpk/edit?usp=sharing',
     demoVideo: '#',
@@ -135,7 +135,7 @@ export const PROJECT_DATA: ProjectData[] = [
     tech: ['Next.js', 'Python', 'GraphQL', 'FastAPI', 'LLM'],
     year: '2026',
     image: '/threatlens.jpg',
-    github: 'https://github.com/Rachit-Kakkad1/ThreatLens/tree/main/Code',
+    github: 'https://github.com/theRkakkad/ThreatLens/tree/main/Code',
     live: 'https://threatlens-topaz.vercel.app',
     docs: 'https://docs.google.com/document/d/1AuiSrd1yMwjebAwYMWGrqnAixB53S5ombRf-EQyiQQU/edit?usp=sharing',
     demoVideo: '#',
@@ -153,7 +153,7 @@ export const PROJECT_DATA: ProjectData[] = [
     tech: ['Vue.js', 'Node.js', 'PostgreSQL', 'Maps API', 'Socket.io'],
     year: '2026',
     image: '/fleetflow.jpg',
-    github: 'https://github.com/Rachit-Kakkad1/FleetFlow',
+    github: 'https://github.com/theRkakkad/FleetFlow',
     live: 'https://fleet-flow-smoky-eta.vercel.app/',
     docs: 'https://docs.google.com/document/d/1OBtAA_lxoXI50-U0dwHdGy9KY2ZdGEG58A7syHKZDeY/edit?usp=sharing',
     demoVideo: '#',
@@ -170,7 +170,7 @@ export const PROJECT_DATA: ProjectData[] = [
     tech: ['Python', 'TensorFlow', 'React', 'FastAPI', 'Climate API'],
     year: '2026',
     image: '/lifelens.jpg',
-    github: 'https://github.com/Rachit-Kakkad1/lifelens-ai-dashboard',
+    github: 'https://github.com/theRkakkad/lifelens-ai-dashboard',
     live: 'https://lifelens-ai-dashboard.vercel.app/',
     docs: 'https://docs.google.com/document/d/1cFIByWAw5mDLpWVWPRsOm6qveijE7rSGvvqcr_tJ2-U/edit?usp=sharing',
     demoVideo: '#',
@@ -224,7 +224,7 @@ export const CODINGGITA_DATA: ProjectData = {
   tech: ['React 18', 'TypeScript', 'Framer Motion', 'MongoDB'],
   year: '2026',
   image: '',
-  github: 'https://github.com/Rachit-Kakkad1/CodingGita_Auction',
+  github: 'https://github.com/theRkakkad/CodingGita_Auction',
   live: 'https://codinggita-auction.vercel.app',
   docs: 'https://docs.google.com/document/d/1ql21e0VmAiTVRYbsys-W5urtwtFetfLbO55X5rVThe8/edit?usp=sharing',
   demoVideo: '#',
@@ -254,7 +254,7 @@ export const ARCHIVE_PROJECTS: ArchiveProject[] = [
       { title: "Personalized Insights", description: "AI-generated actionable insights to improve both well-being and reduce carbon emissions." }
     ],
     image: "/lifelens.jpg",
-    github: 'https://github.com/Rachit-Kakkad1/lifelens-ai-dashboard',
+    github: 'https://github.com/theRkakkad/lifelens-ai-dashboard',
     live: 'https://lifelens-ai-dashboard.vercel.app/',
     docs: 'https://docs.google.com/document/d/1cFIByWAw5mDLpWVWPRsOm6qveijE7rSGvvqcr_tJ2-U/edit?usp=sharing',
     gallery: ["https://images.unsplash.com/photo-1633412802994-5c058f151b66?q=80&w=2000&auto=format&fit=crop"]
@@ -280,7 +280,7 @@ export const ARCHIVE_PROJECTS: ArchiveProject[] = [
       { title: "Smart Contracts", description: "Automated payouts when certification criteria are met." }
     ],
     image: "/agricert-main.jpg",
-    github: 'https://github.com/Rachit-Kakkad1/agricert-platform',
+    github: 'https://github.com/theRkakkad/agricert-platform',
     live: 'https://agricert-khaki.vercel.app',
     docs: 'https://docs.google.com/document/d/1SQXzdd0F696l9_OcGtVPnEA_DszccIw5KZ2__57ZIeY/edit?usp=sharing',
     gallery: [
@@ -310,7 +310,7 @@ export const ARCHIVE_PROJECTS: ArchiveProject[] = [
       { title: "AI Anomaly Detection", description: "Predictive monitoring flags fuel consumption irregularities for audit." }
     ],
     image: "/fleetflow.jpg",
-    github: 'https://github.com/Rachit-Kakkad1/FleetFlow',
+    github: 'https://github.com/theRkakkad/FleetFlow',
     live: 'https://fleet-flow-smoky-eta.vercel.app/',
     docs: 'https://docs.google.com/document/d/1OBtAA_lxoXI50-U0dwHdGy9KY2ZdGEG58A7syHKZDeY/edit?usp=sharing',
     gallery: ["https://images.unsplash.com/photo-1551076805-e18690c5e561?q=80&w=2000&auto=format&fit=crop"]
@@ -335,7 +335,7 @@ export const ARCHIVE_PROJECTS: ArchiveProject[] = [
       { title: "Transparent Risk Scoring", description: "Clear, actionable metrics for prioritizing security patches." }
     ],
     image: "/threatlens.jpg",
-    github: 'https://github.com/Rachit-Kakkad1/ThreatLens/tree/main/Code',
+    github: 'https://github.com/theRkakkad/ThreatLens/tree/main/Code',
     live: 'https://threatlens-topaz.vercel.app',
     docs: 'https://docs.google.com/document/d/1AuiSrd1yMwjebAwYMWGrqnAixB53S5ombRf-EQyiQQU/edit?usp=sharing',
     gallery: ["https://images.unsplash.com/photo-1642104704074-907c0698cbd9?q=80&w=2000&auto=format&fit=crop"]
@@ -361,7 +361,7 @@ export const hackathons: HackathonData[] = [
       '/certificates/hackathons/electrosphere/group-3.png'
     ],
     links: {
-      github: 'https://github.com/Rachit-Kakkad1/ThreatLens/tree/main/Code',
+      github: 'https://github.com/theRkakkad/ThreatLens/tree/main/Code',
       live: 'https://threatlens-topaz.vercel.app',
       docs: 'https://docs.google.com/document/d/1AuiSrd1yMwjebAwYMWGrqnAixB53S5ombRf-EQyiQQU/edit?usp=sharing'
     }
@@ -398,7 +398,7 @@ export const hackathons: HackathonData[] = [
       '/certificates/hackathons/odoo/odoo-ui-features.png'
     ],
     links: {
-      github: 'https://github.com/Rachit-Kakkad1/Odoo_X_GV_PLM',
+      github: 'https://github.com/theRkakkad/Odoo_X_GV_PLM',
       live: 'https://plm-x-odooxgv.vercel.app/',
       docs: 'https://docs.google.com/document/d/1Yg9hS-GvHKx78EqMVn_XZEPGbSU4UotWM1XLT5FpHpk/edit?usp=sharing'
     }
@@ -422,7 +422,7 @@ export const hackathons: HackathonData[] = [
       '/certificates/hackathons/HackCrux X LNMIT/solo-3.jpg'
     ],
     links: {
-      github: 'https://github.com/Rachit-Kakkad1/build-with-ai-hackcrux-2026',
+      github: 'https://github.com/theRkakkad/build-with-ai-hackcrux-2026',
       live: 'https://cos-cognitiveoperatingsystem.vercel.app/',
       docs: 'https://docs.google.com/document/d/1w1YYJ2Cu5fKI3OBfKgHwMGrGMzQzoGKCNKIualZrZk8/edit?usp=sharing'
     }
@@ -445,7 +445,7 @@ export const hackathons: HackathonData[] = [
       '/certificates/hackathons/dev heat/team-1.JPG'
     ],
     links: {
-      github: 'https://github.com/Rachit-Kakkad1/lifelens-ai-dashboard',
+      github: 'https://github.com/theRkakkad/lifelens-ai-dashboard',
       live: 'https://lifelens-ai-dashboard.vercel.app/',
       docs: 'https://docs.google.com/document/d/1cFIByWAw5mDLpWVWPRsOm6qveijE7rSGvvqcr_tJ2-U/edit?usp=sharing'
     }
@@ -463,7 +463,7 @@ export const hackathons: HackathonData[] = [
     image: '/certificates/hackathons/Openpools ( 30 hrs ).jpg',
     images: ['/certificates/hackathons/Openpools ( 30 hrs ).jpg'],
     links: {
-      github: 'https://github.com/Rachit-Kakkad1/agricert-platform',
+      github: 'https://github.com/theRkakkad/agricert-platform',
       live: 'https://agricert-khaki.vercel.app',
       docs: 'https://docs.google.com/document/d/1SQXzdd0F696l9_OcGtVPnEA_DszccIw5KZ2__57ZIeY/edit?usp=sharing'
     }

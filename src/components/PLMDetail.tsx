@@ -119,7 +119,7 @@ export default function PLMDetail({ onClose }: PLMDetailProps) {
         ><ArrowLeft size={16} /> Back to Projects</button>
         <div style={{ display: 'flex', gap: '12px' }}>
           {[
-            { href: 'https://github.com/Rachit-Kakkad1/Odoo_X_GV_PLM', icon: <Github size={16} /> },
+            { href: 'https://github.com/theRkakkad/Odoo_X_GV_PLM', icon: <Github size={16} /> },
             { href: 'https://plm-x-odooxgv.vercel.app/', icon: <Globe size={16} /> },
             { href: 'https://docs.google.com/document/d/1Yg9hS-GvHKx78EqMVn_XZEPGbSU4UotWM1XLT5FpHpk/edit?usp=sharing', icon: <FileText size={16} /> },
           ].map((link, i) => (
@@ -159,7 +159,7 @@ export default function PLMDetail({ onClose }: PLMDetailProps) {
                 style={{ padding: '16px 32px', background: accent, color: '#ffffff', fontFamily: "'IBM Plex Mono', monospace", fontSize: '12px', letterSpacing: '2px', fontWeight: 700, textTransform: 'uppercase', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '8px', borderRadius: '4px', boxShadow: `0 8px 30px ${accentBg}0.3)` }}>
                 <ExternalLink size={16} /> Enter Matrix
               </a>
-              <a href="https://github.com/Rachit-Kakkad1/Odoo_X_GV_PLM" target="_blank" rel="noopener noreferrer"
+              <a href="https://github.com/theRkakkad/Odoo_X_GV_PLM" target="_blank" rel="noopener noreferrer"
                 style={{ padding: '16px 32px', border: `1px solid rgba(255,255,255,0.1)`, color: '#F5F2ED', fontFamily: "'IBM Plex Mono', monospace", fontSize: '12px', letterSpacing: '2px', fontWeight: 700, textTransform: 'uppercase', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '8px', borderRadius: '4px', background: 'rgba(255,255,255,0.03)', backdropFilter: 'blur(10px)' }}>
                 <Github size={16} /> Source Code
               </a>
@@ -480,7 +480,7 @@ export default function PLMDetail({ onClose }: PLMDetailProps) {
                 style={{ padding: '16px 36px', background: accent, color: '#ffffff', fontFamily: "'IBM Plex Mono', monospace", fontSize: '12px', letterSpacing: '2px', fontWeight: 700, textTransform: 'uppercase', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '8px', borderRadius: '4px' }}>
                 <ExternalLink size={16} /> View System
               </a>
-              <a href="https://github.com/Rachit-Kakkad1/Odoo_X_GV_PLM" target="_blank" rel="noopener noreferrer"
+              <a href="https://github.com/theRkakkad/Odoo_X_GV_PLM" target="_blank" rel="noopener noreferrer"
                 style={{ padding: '16px 36px', border: `1px solid rgba(255,255,255,0.2)`, color: '#ffffff', fontFamily: "'IBM Plex Mono', monospace", fontSize: '12px', letterSpacing: '2px', fontWeight: 700, textTransform: 'uppercase', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '8px', borderRadius: '4px', background: 'transparent' }}>
                 <Github size={16} /> GitHub
               </a>

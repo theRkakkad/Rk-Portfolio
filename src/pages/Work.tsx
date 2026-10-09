@@ -149,7 +149,7 @@ export default function Work() {
               Curated Works 2024 — 2026
             </p>
             <div className="flex gap-8">
-              <a href="https://github.com/Rachit-Kakkad1" target="_blank" rel="noopener noreferrer" className="text-black font-medium hover:text-[#B45309] transition-colors duration-300 underline underline-offset-8 decoration-black/10 hover:decoration-[#B45309]/30">GitHub</a>
+              <a href="https://github.com/theRkakkad" target="_blank" rel="noopener noreferrer" className="text-black font-medium hover:text-[#B45309] transition-colors duration-300 underline underline-offset-8 decoration-black/10 hover:decoration-[#B45309]/30">GitHub</a>
               <a href="https://www.linkedin.com/in/rachit-kakkad-r29052007k" target="_blank" rel="noopener noreferrer" className="text-black font-medium hover:text-[#B45309] transition-colors duration-300 underline underline-offset-8 decoration-black/10 hover:decoration-[#B45309]/30">LinkedIn</a>
             </div>
           </div>

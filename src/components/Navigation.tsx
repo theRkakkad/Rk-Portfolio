@@ -14,7 +14,7 @@ const NAV_ITEMS = [
 ];
 
 const SOCIAL_LINKS = [
-  { name: 'Github', url: 'https://github.com/Rachit-Kakkad1', Icon: Github },
+  { name: 'Github', url: 'https://github.com/theRkakkad', Icon: Github },
   { name: 'LinkedIn', url: 'https://www.linkedin.com/in/rachit-kakkad-r29052007k', Icon: Linkedin },
   { name: 'YouTube', url: 'https://www.youtube.com/@RachitKakkad', Icon: Youtube },
   { name: 'X', url: 'https://x.com/rachit_kakk2957', Icon: XIcon },

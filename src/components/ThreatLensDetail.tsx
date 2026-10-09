@@ -79,7 +79,7 @@ export default function ThreatLensDetail({ onClose }: ThreatLensDetailProps) {
         ><ArrowLeft size={16} /> Back to Projects</button>
         <div style={{ display: 'flex', gap: '12px' }}>
           {[
-            { href: 'https://github.com/Rachit-Kakkad1/ThreatLens_UI_Backend', icon: <Github size={16} /> },
+            { href: 'https://github.com/theRkakkad/ThreatLens_UI_Backend', icon: <Github size={16} /> },
             { href: 'https://threat-lens-ui-backend.vercel.app/', icon: <Globe size={16} /> },
             { href: 'https://docs.google.com/document/d/1_T0Fp1jR8zFqM2tCq4Ew5uXvXhM2xU4F4RzFqM2tCq4/edit?usp=sharing', icon: <FileText size={16} /> },
           ].map((link, i) => (
@@ -368,7 +368,7 @@ export default function ThreatLensDetail({ onClose }: ThreatLensDetailProps) {
                 style={{ padding: '16px 36px', background: accent, color: '#ffffff', fontFamily: "'IBM Plex Mono', monospace", fontSize: '12px', letterSpacing: '2px', fontWeight: 700, textTransform: 'uppercase', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '8px', borderRadius: '4px' }}>
                 <ExternalLink size={16} /> Enter Platform
               </a>
-              <a href="https://github.com/Rachit-Kakkad1/ThreatLens_UI_Backend" target="_blank" rel="noopener noreferrer"
+              <a href="https://github.com/theRkakkad/ThreatLens_UI_Backend" target="_blank" rel="noopener noreferrer"
                 style={{ padding: '16px 36px', border: `1px solid rgba(255,255,255,0.2)`, color: '#ffffff', fontFamily: "'IBM Plex Mono', monospace", fontSize: '12px', letterSpacing: '2px', fontWeight: 700, textTransform: 'uppercase', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '8px', borderRadius: '4px', background: 'transparent' }}>
                 <Github size={16} /> GitHub
               </a>

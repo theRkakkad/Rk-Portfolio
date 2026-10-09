@@ -78,7 +78,7 @@ export default function AgriCertDetail({ onClose }: AgriCertDetailProps) {
         ><ArrowLeft size={16} /> Back to Projects</button>
         <div style={{ display: 'flex', gap: '12px' }}>
           {[
-            { href: 'https://github.com/Rachit-Kakkad1/agricert-platform', icon: <Github size={16} /> },
+            { href: 'https://github.com/theRkakkad/agricert-platform', icon: <Github size={16} /> },
             { href: 'https://agricert-khaki.vercel.app', icon: <Globe size={16} /> },
             { href: 'https://docs.google.com/document/d/1SQXzdd0F696l9_OcGtVPnEA_DszccIw5KZ2__57ZIeY/edit?usp=sharing', icon: <FileText size={16} /> },
           ].map((link, i) => (
@@ -113,7 +113,7 @@ export default function AgriCertDetail({ onClose }: AgriCertDetailProps) {
                 style={{ padding: '14px 28px', background: accent, color: '#ffffff', fontFamily: "'IBM Plex Mono', monospace", fontSize: '11px', letterSpacing: '2px', fontWeight: 700, textTransform: 'uppercase', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '8px', borderRadius: '4px' }}>
                 <ExternalLink size={14} /> View Live
               </a>
-              <a href="https://github.com/Rachit-Kakkad1/agricert-platform" target="_blank" rel="noopener noreferrer"
+              <a href="https://github.com/theRkakkad/agricert-platform" target="_blank" rel="noopener noreferrer"
                 style={{ padding: '14px 28px', border: `1px solid ${borderColor}`, color: textPrimary, fontFamily: "'IBM Plex Mono', monospace", fontSize: '11px', letterSpacing: '2px', fontWeight: 700, textTransform: 'uppercase', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '8px', borderRadius: '4px', background: cardBg }}>
                 <Github size={14} /> Source Code
               </a>
@@ -421,7 +421,7 @@ export default function AgriCertDetail({ onClose }: AgriCertDetailProps) {
                 style={{ padding: '14px 28px', background: accent, color: '#ffffff', fontFamily: "'IBM Plex Mono', monospace", fontSize: '11px', letterSpacing: '2px', fontWeight: 700, textTransform: 'uppercase', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '8px', borderRadius: '4px' }}>
                 <ExternalLink size={14} /> View Live
               </a>
-              <a href="https://github.com/Rachit-Kakkad1/agricert-platform" target="_blank" rel="noopener noreferrer"
+              <a href="https://github.com/theRkakkad/agricert-platform" target="_blank" rel="noopener noreferrer"
                 style={{ padding: '14px 28px', border: `1px solid ${borderColor}`, color: textPrimary, fontFamily: "'IBM Plex Mono', monospace", fontSize: '11px', letterSpacing: '2px', fontWeight: 700, textTransform: 'uppercase', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '8px', borderRadius: '4px', background: cardBg }}>
                 <Github size={14} /> GitHub
               </a>

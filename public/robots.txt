@@ -1,6 +1,37 @@
-# Robots.txt for https://rachit-hk-portfolio.vercel.app
+# Robots.txt for Rachit Kakkad Portfolio
+# Canonical Domain: https://rachit-hk-portfolio.vercel.app
 
 User-agent: *
 Allow: /
 
+# Search Engine Crawlers
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+# AI Crawlers & Agents (LLM Search & Knowledge Indexing)
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+# Exclude raw 3D Spline binary files from crawl waste
+Disallow: /*.spline$
+Disallow: /*.splinecode$
+
+# Canonical Host & Sitemaps
+Host: https://rachit-hk-portfolio.vercel.app
 Sitemap: https://rachit-hk-portfolio.vercel.app/sitemap.xml
+Sitemap: https://rachit-hk-portfolio.vercel.app/site.xml

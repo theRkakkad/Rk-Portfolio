@@ -26,7 +26,7 @@ export default function SanjeevaniDetail({ onClose }: { onClose: () => void }) {
 
   const projectLinks = [
     { label: 'Live Platform', icon: <Globe size={14} />, url: 'https://sanjeevani-healthcare.vercel.app' },
-    { label: 'Source Code', icon: <Github size={14} />, url: 'https://github.com/Rachit-Kakkad1/Sanjeevani' },
+    { label: 'Source Code', icon: <Github size={14} />, url: 'https://github.com/theRkakkad/Sanjeevani' },
     { label: 'Architecture', icon: <Layout size={14} />, url: '#' },
     { label: 'Documentation', icon: <FileText size={14} />, url: '#' },
     { label: 'API Reference', icon: <Terminal size={14} />, url: '#' },

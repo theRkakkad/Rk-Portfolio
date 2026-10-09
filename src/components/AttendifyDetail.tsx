@@ -77,7 +77,7 @@ export default function AttendifyDetail({ onClose }: AttendifyDetailProps) {
         ><ArrowLeft size={16} /> Dashboard</button>
         <div style={{ display: 'flex', gap: '12px' }}>
           {[
-            { href: 'https://github.com/Rachit-Kakkad1/Attendify-College-Attendance-Predictor', icon: <Github size={16} /> },
+            { href: 'https://github.com/theRkakkad/Attendify-College-Attendance-Predictor', icon: <Github size={16} /> },
             { href: '#', icon: <Globe size={16} /> },
           ].map((link, i) => (
             <a key={i} href={link.href} target="_blank" rel="noopener noreferrer"

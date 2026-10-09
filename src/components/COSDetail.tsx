@@ -78,7 +78,7 @@ export default function COSDetail({ onClose }: COSDetailProps) {
         ><ArrowLeft size={16} /> Back to Projects</button>
         <div style={{ display: 'flex', gap: '12px' }}>
           {[
-            { href: 'https://github.com/Rachit-Kakkad1/build-with-ai-hackcrux-2026', icon: <Github size={16} /> },
+            { href: 'https://github.com/theRkakkad/build-with-ai-hackcrux-2026', icon: <Github size={16} /> },
             { href: 'https://cos-cognitiveoperatingsystem.vercel.app/', icon: <Globe size={16} /> },
             { href: 'https://docs.google.com/document/d/1w1YYJ2Cu5fKI3OBfKgHwMGrGMzQzoGKCNKIualZrZk8/edit?usp=sharing', icon: <FileText size={16} /> },
           ].map((link, i) => (
@@ -120,7 +120,7 @@ export default function COSDetail({ onClose }: COSDetailProps) {
                 style={{ padding: '14px 28px', background: accent, color: '#ffffff', fontFamily: "'IBM Plex Mono', monospace", fontSize: '11px', letterSpacing: '2px', fontWeight: 700, textTransform: 'uppercase', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '8px', borderRadius: '4px' }}>
                 <ExternalLink size={14} /> View Live
               </a>
-              <a href="https://github.com/Rachit-Kakkad1/build-with-ai-hackcrux-2026" target="_blank" rel="noopener noreferrer"
+              <a href="https://github.com/theRkakkad/build-with-ai-hackcrux-2026" target="_blank" rel="noopener noreferrer"
                 style={{ padding: '14px 28px', border: `1px solid ${borderColor}`, color: textPrimary, fontFamily: "'IBM Plex Mono', monospace", fontSize: '11px', letterSpacing: '2px', fontWeight: 700, textTransform: 'uppercase', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '8px', borderRadius: '4px', background: cardBg }}>
                 <Github size={14} /> Source Code
               </a>
@@ -601,7 +601,7 @@ export default function COSDetail({ onClose }: COSDetailProps) {
                 style={{ padding: '14px 28px', background: accent, color: '#ffffff', fontFamily: "'IBM Plex Mono', monospace", fontSize: '11px', letterSpacing: '2px', fontWeight: 700, textTransform: 'uppercase', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '8px', borderRadius: '4px' }}>
                 <ExternalLink size={14} /> View Live
               </a>
-              <a href="https://github.com/Rachit-Kakkad1/build-with-ai-hackcrux-2026" target="_blank" rel="noopener noreferrer"
+              <a href="https://github.com/theRkakkad/build-with-ai-hackcrux-2026" target="_blank" rel="noopener noreferrer"
                 style={{ padding: '14px 28px', border: `1px solid ${borderColor}`, color: textPrimary, fontFamily: "'IBM Plex Mono', monospace", fontSize: '11px', letterSpacing: '2px', fontWeight: 700, textTransform: 'uppercase', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '8px', borderRadius: '4px', background: cardBg }}>
                 <Github size={14} /> GitHub
               </a>

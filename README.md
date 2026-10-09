@@ -76,7 +76,7 @@ Every pixel is intentional. Every animation serves a purpose. Every interaction 
 | Platform | URL |
 |----------|-----|
 | **Production** | [rachitkakkad.vercel.app](https://rachitkakkad.vercel.app) |
-| **Source Code** | [github.com/Rachit-Kakkad1/Rk-Portfolio](https://github.com/Rachit-Kakkad1/Rk-Portfolio) |
+| **Source Code** | [github.com/theRkakkad/Rk-Portfolio](https://github.com/theRkakkad/Rk-Portfolio) |
 
 ---
 
@@ -459,7 +459,7 @@ Rk-Portfolio/
 
 **1. Clone the Matrix**
 ```bash
-git clone https://github.com/Rachit-Kakkad1/Rk-Portfolio.git
+git clone https://github.com/theRkakkad/Rk-Portfolio.git
 cd Rk-Portfolio
 ```
 
@@ -518,7 +518,7 @@ vercel
 4. Deploy automatically on every push
 
 **Option 3: One-Click Deploy**
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/Rachit-Kakkad1/Rk-Portfolio)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/theRkakkad/Rk-Portfolio)
 
 ### Build Output
 
@@ -538,8 +538,8 @@ dist/
 
 This is a personal portfolio, but feedback and suggestions are always welcome!
 
-1. **Found a bug?** Open an [Issue](https://github.com/Rachit-Kakkad1/Rk-Portfolio/issues)
-2. **Have a suggestion?** Open a [Discussion](https://github.com/Rachit-Kakkad1/Rk-Portfolio/discussions)
+1. **Found a bug?** Open an [Issue](https://github.com/theRkakkad/Rk-Portfolio/issues)
+2. **Have a suggestion?** Open a [Discussion](https://github.com/theRkakkad/Rk-Portfolio/discussions)
 3. **Want to collaborate?** Reach out via [LinkedIn](https://linkedin.com/in/rachit-kakkad-r29052007k) or [Email](mailto:rachitkakkad@gmail.com)
 
 ---
@@ -556,7 +556,7 @@ This project is open source and available under the [MIT License](LICENSE).
 
 | Platform | Link |
 |----------|------|
-| **GitHub** | [github.com/Rachit-Kakkad1](https://github.com/Rachit-Kakkad1) |
+| **GitHub** | [github.com/theRkakkad](https://github.com/theRkakkad) |
 | **LinkedIn** | [linkedin.com/in/rachit-kakkad-r29052007k](https://linkedin.com/in/rachit-kakkad-r29052007k) |
 | **YouTube** | [youtube.com/@RachitKakkad](https://www.youtube.com/@RachitKakkad) |
 | **LeetCode** | [leetcode.com/u/kUyAWXHOC5](https://leetcode.com/u/kUyAWXHOC5) |

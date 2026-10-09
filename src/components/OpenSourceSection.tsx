@@ -323,7 +323,7 @@ export default function OpenSourceSection() {
 
           <div className="flex flex-wrap items-center justify-center gap-4">
             <a
-              href="https://github.com/Rachit-Kakkad1"
+              href="https://github.com/theRkakkad"
               target="_blank"
               rel="noopener noreferrer"
               className="group inline-flex items-center gap-3 border border-[#1A1816] px-8 py-4 font-mono text-[11px] font-black tracking-[0.3em] uppercase hover:bg-[#1A1816] hover:text-white transition-all duration-500"

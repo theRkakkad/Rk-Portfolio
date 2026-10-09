@@ -381,7 +381,7 @@ export default function ContactSection() {
                 <h4 className="text-white/40 text-sm uppercase tracking-widest mb-6">Socials</h4>
                 <div className="flex flex-col gap-4">
                   {[
-                    { name: 'GitHub', url: 'https://github.com/Rachit-Kakkad1' },
+                    { name: 'GitHub', url: 'https://github.com/theRkakkad' },
                     { name: 'LinkedIn', url: 'https://www.linkedin.com/in/rachit-kakkad-r29052007k' },
                     { name: 'YouTube', url: 'https://www.youtube.com/@RachitKakkad' },
                     { name: 'LeetCode', url: 'https://leetcode.com/u/kUyAWXHOC5' },

@@ -7,14 +7,13 @@ import { Helmet } from 'react-helmet-async';
 import createGlobe from 'cobe';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import AIAssistant from '../components/AIAssistant';
 import VideoIntro from '../components/VideoIntro';
 import LazySection from '../components/LazySection';
 import SEO from '../components/SEO';
 import { useScrollReveal } from '../useScrollReveal';
 
 const LazyAboutSection = React.lazy(() => import('../components/AboutSection'));
-const LazyKeyboardSection = React.lazy(() => import('../components/KeyboardSection'));
+const LazyTechStackSection = React.lazy(() => import('../components/TechStack/TechStackSection'));
 const LazyProjectsSection = React.lazy(() => import('../components/ProjectsSection'));
 const LazyOpenSourceSection = React.lazy(() => import('../components/OpenSourceSection'));
 const LazyCertificateSection = React.lazy(() => import('../components/CertificateSection'));
@@ -182,7 +181,7 @@ export default function Home() {
               </p>
 
               <div className="mt-4 md:mt-6 flex flex-wrap items-center gap-4 md:gap-5">
-                <a href="https://github.com/Rachit-Kakkad1" target="_blank" rel="noopener noreferrer" className="text-white/50 hover:text-white hover:scale-110 transition-all duration-300" aria-label="GitHub"><Github size={22} /></a>
+                <a href="https://github.com/theRkakkad" target="_blank" rel="noopener noreferrer" className="text-white/50 hover:text-white hover:scale-110 transition-all duration-300" aria-label="GitHub"><Github size={22} /></a>
                 <a href="https://www.linkedin.com/in/rachit-kakkad-r29052007k" target="_blank" rel="noopener noreferrer" className="text-white/50 hover:text-white hover:scale-110 transition-all duration-300" aria-label="LinkedIn"><Linkedin size={22} /></a>
                 <a href="https://www.youtube.com/@RachitKakkad" target="_blank" rel="noopener noreferrer" className="text-white/50 hover:text-white hover:scale-110 transition-all duration-300" aria-label="YouTube"><Youtube size={22} /></a>
                 <a href="https://x.com/rachit_kakk2957" target="_blank" rel="noopener noreferrer" className="text-white/50 hover:text-white hover:scale-110 transition-all duration-300" aria-label="X (Twitter)"><XIcon size={22} /></a>
@@ -230,9 +229,7 @@ export default function Home() {
           </LazySection>
 
           <LazySection id="skills">
-            <section aria-label="Skills" data-scroll-reveal="fade-up" data-scroll-delay="0.1">
-              <LazyKeyboardSection />
-            </section>
+            <LazyTechStackSection />
           </LazySection>
 
           <div id="work">
@@ -287,10 +284,6 @@ export default function Home() {
           <LazySection id="contact">
             <section aria-label="Contact"><LazyContactSection /></section>
           </LazySection>
-
-
-
-          <AIAssistant />
         </React.Suspense>
       </div>
     </main>

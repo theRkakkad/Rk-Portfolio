@@ -9,8 +9,8 @@ const EDUCATION_DATA = [
     duration: "2025 — 2029",
     status: "1st Year (Pursuing)",
     performance: {
-      label: "CGPA",
-      value: "9.81",
+      label: "SGPA",
+      value: "9.46",
       note: "Top Tier"
     },
     focusAreas: [
