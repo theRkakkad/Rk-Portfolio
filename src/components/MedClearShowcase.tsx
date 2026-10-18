@@ -167,7 +167,7 @@ export default function MedClearShowcase() {
 
             {/* CTA */}
             <motion.button 
-              onClick={() => navigate('/project/medclear')}
+              onClick={() => navigate('/project/sanjeevani')}
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}

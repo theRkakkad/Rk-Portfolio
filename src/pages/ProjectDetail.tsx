@@ -25,6 +25,7 @@ const DETAIL_COMPONENTS: Record<string, React.ComponentType<{ onClose: () => voi
   codinggita: CodingGitaDetail,
   attendify: AttendifyDetail,
   sanjeevani: SanjeevaniDetail,
+  medclear: SanjeevaniDetail,
 };
 
 export default function ProjectDetail() {
@@ -35,8 +36,9 @@ export default function ProjectDetail() {
     window.scrollTo(0, 0);
   }, [id]);
 
-  const project = PROJECT_DATA.find(p => p.id === id);
-  const hackathon = id?.startsWith('hackathon-') ? hackathons.find(h => h.id.toString() === id.replace('hackathon-', '')) : null;
+  const resolvedId = id === 'medclear' ? 'sanjeevani' : id;
+  const project = PROJECT_DATA.find(p => p.id === resolvedId);
+  const hackathon = resolvedId?.startsWith('hackathon-') ? hackathons.find(h => h.id.toString() === resolvedId.replace('hackathon-', '')) : null;
 
   if (!id || (!DETAIL_COMPONENTS[id] && !project && !hackathon)) {
     return (
@@ -54,7 +56,7 @@ export default function ProjectDetail() {
     );
   }
 
-  const DetailComponent = DETAIL_COMPONENTS[id];
+  const DetailComponent = DETAIL_COMPONENTS[resolvedId] || DETAIL_COMPONENTS[id];
   const projectTitle = project?.headline || hackathon?.project || (id ? `${id.charAt(0).toUpperCase()}${id.slice(1)}` : 'Project');
   const projectDescription = project?.description || hackathon?.outcome || `Learn about ${projectTitle}, a project by Rachit Kakkad.`;
   const projectTech = project?.tech?.join(', ') || hackathon?.tech?.join(', ') || 'React, Node.js';
@@ -74,7 +76,7 @@ export default function ProjectDetail() {
       <Helmet>
         <title>{projectTitle} | Rachit Kakkad</title>
         <meta name="description" content={`Details of ${projectTitle} — a project by Rachit Kakkad, Full Stack and AI Engineer.`} />
-        <link rel="canonical" href={`https://rachit-hk-portfolio.vercel.app/project/${id}`} />
+        <link rel="canonical" href={`https://rachit-hk-portfolio.vercel.app/project/${resolvedId}`} />
       </Helmet>
       <SEO 
         title={projectTitle}
